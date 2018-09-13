@@ -4,7 +4,9 @@ var fs = require('fs');
 
 module.exports = function(grunt) {
 
-    // Project configuration.
+     require('load-grunt-tasks')(grunt);
+
+     // Project configuration.
     grunt.initConfig({
         // Metadata.
         pkg: grunt.file.readJSON('bootstrap-table.jquery.json'),
@@ -26,21 +28,55 @@ module.exports = function(grunt) {
                 dest: 'dist/<%= pkg.name %>-locale-all.js'
             }
         },
-        uglify: {
+        es6transpiler: {
             options: {
-                banner: '<%= banner %>'
+                sourceMap: true,
+                "environments":["node", "browser"],
+                "globals": {"jQuery":true},
+                "disallowUnknownReferences": false,
+                "disallowDuplicated": false
             },
             basic_target: {
                 files: {
-                    'dist/<%= pkg.name %>.min.js': ['src/<%=pkg.name %>.js'],
+                    'src5/<%=pkg.name %>.js': ['src/<%=pkg.name %>.js'],
                     //'dist/<%= pkg.name %>-all.min.js': ['dist/<%=pkg.name %>-all.js'],
-                    'dist/<%= pkg.name %>-locale-all.min.js': ['dist/<%=pkg.name %>-locale-all.js']
+                    'src5/<%=pkg.name %>-locale-all.js': ['dist/<%=pkg.name %>-locale-all.js']
                 }
             },
             locale_target: {
                 files: [{
                     expand: true,
                     cwd: 'src/locale',
+                    src: '**/*.js',
+                    dest: 'src5/locale',
+                    ext: '.min.js' // replace .js to .min.js
+                }]
+            },
+            extensions_target: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/extensions',
+                    src: '**/*.js',
+                    dest: 'src5/extensions',
+                    ext: '.min.js' // replace .js to .min.js
+                }]
+            }
+        },
+        uglify: {
+            options: {
+                banner: '<%= banner %>'
+            },
+            basic_target: {
+                files: {
+                    'dist/<%= pkg.name %>.min.js': ['src5/<%=pkg.name %>.js'],
+                    //'dist/<%= pkg.name %>-all.min.js': ['dist/<%=pkg.name %>-all.js'],
+                    'dist/<%= pkg.name %>-locale-all.min.js': ['src5/<%=pkg.name %>-locale-all.js']
+                }
+            },
+            locale_target: {
+                files: [{
+                    expand: true,
+                    cwd: 'src5/locale',
                     src: '**/*.js',
                     dest: 'dist/locale',
                     ext: '.min.js' // replace .js to .min.js
@@ -49,7 +85,7 @@ module.exports = function(grunt) {
             extensions_target: {
                 files: [{
                     expand: true,
-                    cwd: 'src/extensions',
+                    cwd: 'src5/extensions',
                     src: '**/*.js',
                     dest: 'dist/extensions',
                     ext: '.min.js' // replace .js to .min.js
@@ -128,5 +164,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-release');
 
-    grunt.registerTask('default', ['clean', 'concat', 'uglify', 'cssmin', 'copy']);
+    grunt.registerTask('default', ['clean', 'concat', 'es6transpiler', 'uglify', 'cssmin', 'copy']);
 };

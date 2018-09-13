@@ -222,7 +222,7 @@
       return pageNumber + ' Zeilen pro Seite.';
     },
     formatShowingRows: function (pageFrom, pageTo, totalRows) {
-      return 'Zeige Zeile ' + pageFrom + ' bis ' + pageTo + ' von ' + totalRows + ' Zeilen' + ((totalRows > 1) ? "n" : "")+".";
+      return 'Zeige Zeile ' + pageFrom + ' bis ' + pageTo + ' von ' + totalRows + ' Zeile' + ((totalRows > 1) ? "n" : "")+".";
     },
     formatDetailPagination: function (totalRows) {
       return 'Zeige ' + totalRows + ' Zeile' + ((totalRows > 1) ? "n" : "")+".";
@@ -763,6 +763,56 @@
     $.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['fa-IR']);
 
 })(jQuery);
+/**
+ * Bootstrap Table Finnish translations
+ * Author: Minna Lehtomäki <minna.j.lehtomaki@gmail.com>
+ */
+(function ($) {
+    'use strict';
+
+    $.fn.bootstrapTable.locales['fi-FI'] = {
+        formatLoadingMessage: function () {
+            return 'Ladataan, ole hyvä ja odota...';
+        },
+        formatRecordsPerPage: function (pageNumber) {
+            return pageNumber + ' riviä sivulla';
+        },
+        formatShowingRows: function (pageFrom, pageTo, totalRows) {
+            return 'Näytetään rivit ' + pageFrom + ' - ' + pageTo + ' / ' + totalRows;
+        },
+        formatSearch: function () {
+            return 'Hae';
+        },
+        formatNoMatches: function () {
+            return 'Hakuehtoja vastaavia tuloksia ei löytynyt';
+        },
+        formatPaginationSwitch: function () {
+            return 'Näytä/Piilota sivutus';
+        },
+        formatRefresh: function () {
+            return 'Päivitä';
+        },
+        formatToggle: function () {
+            return 'Valitse';
+        },
+        formatColumns: function () {
+            return 'Sarakkeet';
+        },
+        formatAllRows: function () {
+            return 'Kaikki';
+        },
+        formatExport: function () {
+            return 'Vie tiedot';
+        },
+        formatClearFilters: function () {
+            return 'Poista suodattimet';
+        }
+    };
+
+    $.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['fi-FI']);
+
+})(jQuery);
+
 /**
  * Bootstrap Table French (Belgium) translation
  * Author: Julien Bisconti (julien.bisconti@gmail.com)

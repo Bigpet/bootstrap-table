@@ -28,9 +28,6 @@
         formatColumns: function () { 
             return 'Colunas';
         },
-        formatAllRows: function () {
-            return 'Todos';
-        },
         formatPaginationSwitch: function () { 
             return 'Ocultar/Exibir paginação';
         },
